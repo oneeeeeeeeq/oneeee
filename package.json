@@ -1,0 +1,26 @@
+{
+  "name": "smart-wrapper",
+  "displayName": "Smart Wrapper",
+  "description": "Оборачивает выделенный код в if / else if / else / while / for / do-while",
+  "version": "0.0.1",
+  "publisher": "oneeeeeeeeq",
+  "engines": { "vscode": "^1.80.0" },
+  "activationEvents": ["onCommand:smartWrapper.wrap"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartWrapper.wrap",
+        "title": "Wrap: обернуть выделение"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "smartWrapper.wrap",
+        "key": "ctrl+alt+w",
+        "mac": "cmd+alt+w",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ]
+  }
+}
