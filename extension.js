@@ -1,25 +1,37 @@
 const vscode = require('vscode');
 
 const TYPES = {
-    if:       { label: 'if (...) { ... }',
-                prompt: 'Условие:',
-                make: c => [`if (${c}) {`, '}'] },
-    elseIf:   { label: 'else if (...) { ... }',
-                prompt: 'Условие:',
-                make: c => [`else if (${c}) {`, '}'] },
-    else:     { label: 'else { ... }',
-                prompt: null,
-                make: () => ['else {', '}'] },
-    while:    { label: 'while (...) { ... }',
-                prompt: 'Условие:',
-                make: c => [`while (${c}) {`, '}'] },
-    for:      { label: 'for (...) { ... }',
-                prompt: 'Заголовок без for:',
-                defaultValue: 'int i = 0; i < n; i++',
-                make: c => [`for (${c}) {`, '}'] },
-    doWhile:  { label: 'do { ... } while (...);',
-                prompt: 'Условие while:',
-                make: c => ['do {', `} while (${c});`] }
+    if: {
+        label: 'if (...) { ... }',
+        prompt: 'Условие:',
+        make: c => [`if (${c}) {`, '}']
+    },
+    elseIf: {
+        label: 'else if (...) { ... }',
+        prompt: 'Условие:',
+        make: c => [`else if (${c}) {`, '}']
+    },
+    else: {
+        label: 'else { ... }',
+        prompt: null,
+        make: () => ['else {', '}']
+    },
+    while: {
+        label: 'while (...) { ... }',
+        prompt: 'Условие:',
+        make: c => [`while (${c}) {`, '}']
+    },
+    for: {
+        label: 'for (...) { ... }',
+        prompt: 'Заголовок без for:',
+        defaultValue: 'int i = 0; i < n; i++',
+        make: c => [`for (${c}) {`, '}']
+    },
+    doWhile: {
+        label: 'do { ... } while (...);',
+        prompt: 'Условие while:',
+        make: c => ['do {', `} while (${c});`]
+    }
 };
 
 function activate(context) {
@@ -52,12 +64,12 @@ function activate(context) {
         const [before, after] = t.make(arg);
 
         const startLine = sel.start.line;
-        const endLine   = sel.end.line;
+        const endLine = sel.end.line;
 
         const firstLineText = editor.document.lineAt(startLine).text;
-        const indentMatch   = firstLineText.match(/^[ \t]*/);
-        const indent        = indentMatch ? indentMatch[0] : '';
-        const innerIndent   = indent + '    ';
+        const indentMatch = firstLineText.match(/^[ \t]*/);
+        const indent = indentMatch ? indentMatch[0] : '';
+        const innerIndent = indent + '    ';
 
         const lines = [];
         for (let i = startLine; i <= endLine; i++) {
@@ -79,6 +91,6 @@ function activate(context) {
     context.subscriptions.push(disposable);
 }
 
-function deactivate() {}
+function deactivate() { }
 
 module.exports = { activate, deactivate };
